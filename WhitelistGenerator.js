@@ -6,18 +6,30 @@ const {
 } = require("ethereumjs-utils");
 const {ethers} = require('ethers');
 
-const privateKey = "";
-const privateKeyV2 = process.env.PRIVATE_WALLET_KEY;
+// const privateKey = "";
+const privateKey = process.env.PRIVATE_WALLET_KEY;
 const signerPvtKey = Buffer.from(privateKey, "hex")  // create an object to match the contracts struct
 
 const CouponTypeEnum = {
-  HQWL: 0,
-  MuseumWL: 1,
-  MansionWL: 2,
-  PrivateWL: 3,
-  PublicWL: 4,
-  ReservedWL: 5
+  PrivateSales: 0,
+  WhiteListSales: 1
 };
+
+var CouponTypeCount = {
+  BasicCount,
+  UltrarareCount,
+  LegendaireCount,
+  eggCount
+};
+
+var CouponClaim = {
+  user,
+  legCount,
+  urEggCount,
+  urCount,
+  basicEggCount,
+  basicCount
+}
 
 // HELPER FUNCTIONS
 function createCoupon(hash, signerPvtKey) {
@@ -39,11 +51,11 @@ function serializeCoupon(coupon) {
   };
 }
 
-const getCoupon = (address, couponType) => {
+const getCoupon = (address, BasicCount, UltrarareCount, LegendaireCount, eggCount, couponType) => {
   const userAddress = ethers.utils.getAddress(address);
   const hashBuffer = generateHashBuffer(
-    ["uint256", "address"],
-    [couponType, userAddress]
+    ["uint256", "uint256", "uint256", "uint256", "uint256", "address"],
+    [couponType, BasicCount, UltrarareCount, LegendaireCount, eggCount, userAddress]
   );
   const coupon = createCoupon(hashBuffer, signerPvtKey);
   return serializeCoupon(coupon)
