@@ -3,11 +3,19 @@ var csv = require('jquery-csv');
 fs = require("fs");
 
 var legendaires = fs.readFileSync("./legendairesId.csv", "utf-8");
+var urEggs = fs.readFileSync("./urEgg.csv", "utf-8");
+var urs = fs.readFileSync("./Ur.csv", "utf-8");
+var basicEggs = fs.readFileSync("./basicEgg.csv", "utf-8");
+var basics = fs.readFileSync("./basic.csv", "utf-8");
 var snapshotTimeout = fs.readFileSync("./holder-snapshot-timeout.csv", "utf-8");
 
 var legendaire = csv.toObjects(legendaires);
+var urEgg = csv.toObjects(urEggs);
+var ur = csv.toObjects(urs);
+var basicEgg = csv.toObjects(basicEggs);
+var basic = csv.toObjects(basics);
 var snapshot = csv.toObjects(snapshotTimeout);
-console.log(legendaire);
+console.log(basics.length);
 
 const coupon = getCoupon("0x5E5871153763645D552Ba5D9082597f3be3D0788", 0, 0, 0, 0, CouponTypeEnum.PrivateSales);
 // console.log(coupon);
@@ -52,12 +60,39 @@ for (let i = 0; i < digest.length; ++i) {
   for (let y = 0; y < digest[i].tokenId.length; y++) {
     for (let z = 0; z < legendaire.length; z++) {
       if (digest[i].tokenId[y] == legendaire[z].Legendaires) {
-        console.log("ok");
-        res[counter2].legendaire++;
+        res[i].legendaire++;
       }
     }
   }
-  counter2++;
+  for (let y = 0; y < digest[i].tokenId.length; y++) {
+    for (let z = 0; z < urEgg.length; z++) {
+      if (digest[i].tokenId[y] == urEgg[z].URegg) {
+        res[i].urEgg++;
+      }
+    }
+  }
+  for (let y = 0; y < digest[i].tokenId.length; y++) {
+    for (let z = 0; z < ur.length; z++) {
+      if (digest[i].tokenId[y] == ur[z].UR) {
+        res[i].ur++;
+      }
+    }
+  }
+  for (let y = 0; y < digest[i].tokenId.length; y++) {
+    for (let z = 0; z < basicEgg.length; z++) {
+      if (digest[i].tokenId[y] == basicEgg[z].BasicEgg) {
+        res[i].basicEgg++;
+      }
+    }
+  }
+  for (let y = 0; y < digest[i].tokenId.length; y++) {
+    for (let z = 0; z < basic.length; z++) {
+      if (digest[i].tokenId[y] == basic[z].Basic) {
+        counter2++;
+        res[i].basic++;
+      }
+    }
+  }
 }
-
 console.log(res);
+console.log(counter2);
