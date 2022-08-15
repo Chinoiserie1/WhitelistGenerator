@@ -7,7 +7,9 @@ var urEggs = fs.readFileSync("./urEgg.csv", "utf-8");
 var urs = fs.readFileSync("./Ur.csv", "utf-8");
 var basicEggs = fs.readFileSync("./basicEgg.csv", "utf-8");
 var basics = fs.readFileSync("./basic.csv", "utf-8");
+
 var snapshotTimeout = fs.readFileSync("./holder-snapshot-timeout.csv", "utf-8");
+// var snapshotWhitelistSale = fs.readFileSync("./holder-snapshot-timeout.csv", "utf-8");
 
 var legendaire = csv.toObjects(legendaires);
 var urEgg = csv.toObjects(urEggs);
@@ -15,6 +17,7 @@ var ur = csv.toObjects(urs);
 var basicEgg = csv.toObjects(basicEggs);
 var basic = csv.toObjects(basics);
 var snapshot = csv.toObjects(snapshotTimeout);
+// var snapshotWLS = csv.toObjects(snapshotWhitelistSale);
 
 // console.log(basic.length);
 // console.log(basicEgg.length);
@@ -118,3 +121,11 @@ for (let i = 0; i < res.length; ++i) {
 }
 
 console.log(privateWLCoupon);
+
+// var whitelistSalesCoupon = [];
+// for (let i = 0; i < snapshotWLS.length; ++i) {
+//   var obj = {};
+//   obj.address = snapshotWLS[i].address;
+//   obj.coupon =  getCoupon(snapshotWLS[i].address, 0, 0, 0, 0, CouponTypeEnum.WhiteListSales);
+//   whitelistSalesCoupon.push(obj);
+// }
