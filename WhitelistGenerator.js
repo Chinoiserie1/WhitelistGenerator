@@ -35,6 +35,20 @@ function serializeCoupon(coupon) {
   };
 }
 
+function concatCoupon(coupon) {
+  let res = coupon.r;
+  for (let i = 2; i < coupon.s.length; i++) {
+    res = res + coupon.s[i];
+  }
+  if (coupon.v == 27) {
+    res = res + "1b";
+  }
+  if (coupon.v == 28) {
+    res = res + "1c";
+  }
+  return res;
+}
+
 const getCoupon = (address, BasicCount, UltrarareCount, LegendaireCount, eggCount, couponType) => {
   const userAddress = ethers.utils.getAddress(address);
   const hashBuffer = generateHashBuffer(
@@ -42,7 +56,8 @@ const getCoupon = (address, BasicCount, UltrarareCount, LegendaireCount, eggCoun
     [couponType, BasicCount, UltrarareCount, LegendaireCount, eggCount, userAddress]
   );
   const coupon = createCoupon(hashBuffer, signerPvtKey);
-  return serializeCoupon(coupon)
+  const serialize = serializeCoupon(coupon);
+  return concatCoupon(serialize);
 };
 
 

@@ -27,7 +27,7 @@ var snapshot = csv.toObjects(snapshotTimeout);
 // console.log(basic.length + basicEgg.length + ur.length + urEgg.length + legendaire.length);
 
 const coupon = getCoupon("0x5E5871153763645D552Ba5D9082597f3be3D0788", 0, 0, 0, 0, CouponTypeEnum.PrivateSales);
-// console.log(coupon);
+console.log(coupon);
 
 var res = [];
 for (let i = 0; i < snapshot.length; ++i) {
@@ -110,7 +110,7 @@ for (let i = 0; i < digest.length; ++i) {
 }
 
 // console.log(res);
-console.log(counter2);
+// console.log(counter2);
 
 var privateWLCoupon = [];
 for (let i = 0; i < res.length; ++i) {
