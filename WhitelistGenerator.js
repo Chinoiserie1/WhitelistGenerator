@@ -57,7 +57,8 @@ const getCoupon = (address, BasicCount, UltrarareCount, LegendaireCount, eggCoun
   );
   const coupon = createCoupon(hashBuffer, signerPvtKey);
   const serialize = serializeCoupon(coupon);
-  return concatCoupon(serialize);
+  return serialize;
+  // return concatCoupon(serialize);
 };
 
 
