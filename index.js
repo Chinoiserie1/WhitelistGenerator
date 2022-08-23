@@ -117,6 +117,11 @@ for (let i = 0; i < res.length; ++i) {
   var obj = {};
   obj.address = res[i].owner;
   obj.coupon = getCoupon(res[i].owner, res[i].basic, res[i].ur, res[i].legendaire, res[i].egg, CouponTypeEnum.PrivateSales);
+  obj.basic = res[i].basic;
+  obj.ur = res[i].ur;
+  obj.legendaire = res[i].legendaire;
+  obj.egg = res[i].egg;
+  obj.PrivateSales = CouponTypeEnum.PrivateSales;
   privateWLCoupon.push(obj);
 }
 
